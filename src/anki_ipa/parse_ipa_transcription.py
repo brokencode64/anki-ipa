@@ -71,7 +71,11 @@ def spanish(word):
 def german(word):
     link = f"https://de.wiktionary.org/wiki/{word}"
     results = parse_wiktionary(link, {'class': 'ipa'})
-    return results[0].getText()
+    import re
+    print(results)
+    for result in results:
+        if re.search(r"[\w.]+\<\/span\>", str(result), re.UNICODE):
+            return result.getText()
 
 
 @transcription
